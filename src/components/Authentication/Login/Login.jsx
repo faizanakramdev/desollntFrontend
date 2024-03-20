@@ -41,7 +41,7 @@ const Login = () => {
     } else if (values?.password?.length < 8) {
       toast.error("Password should be at least 8 characters long.");
     } else {
-        setLoader(true);
+      setLoader(true);
       const payload = {
         email: values?.email,
         password: values?.password,
@@ -50,9 +50,12 @@ const Login = () => {
       await axios
         .post(api?.auth?.login, payload)
         .then((response) => {
-            setLoader(false);
+          setLoader(false);
           toast.success("Success. You are logged in.");
-          localStorage?.setItem("Login", JSON.stringify(response?.data?.login));
+          sessionStorage?.setItem(
+            "Login",
+            JSON.stringify(response?.data?.login)
+          );
           setValues({
             email: "",
             password: "",
@@ -76,9 +79,9 @@ const Login = () => {
         </div>
       ) : (
         <div className="h-svh flex items-center">
-          <div className="relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md max-w-2xl m-auto w-full ">
+          <div className="relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md max-w-sm m-auto w-full ">
             <h3 className="block font-sans text-5xl text-center font-semibold text-cyan-600">
-              Sign In
+              Login In
             </h3>
             <div className="flex flex-col gap-4 p-6">
               <div className="relative w-full min-w-[200px]">
@@ -122,9 +125,9 @@ const Login = () => {
               <button
                 onClick={handleSignin}
                 type="button"
-                className="block w-full select-none rounded-lg bg-gradient-to-tr from-cyan-600 to-cyan-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg hover:shadow-cyan-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full select-none rounded-lg bg-gradient-to-tr from-cyan-600 to-cyan-400 py-3 px-6 text-center align-middle font-sans text-md font-bold uppercase text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg hover:shadow-cyan-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
-                Sign In
+                Login In
               </button>
             </div>
           </div>
